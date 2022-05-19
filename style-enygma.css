@@ -1,0 +1,97 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    color: white;
+}
+
+.fundo{
+    background-image: url(./imgs/esperando.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 50px;
+}
+
+.fundo--remover{
+    display: none;
+}
+
+.fundo--active{
+    background-image: url(./imgs/clicou.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 50px;
+}
+
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color: white;
+}
+
+.obrigado{
+    display: none;
+}
+
+.obrigado--active{
+    display: block;
+}
+
+.resposta--remover{
+    display: none;
+}
+
+.flix{
+    display: none;
+}
+
+.bank{
+    display: none;
+}
+
+.desejo{
+    display: none;
+}
+
+.flix--active{
+    display: block;
+}
+
+.bank--active{
+    display: block;
+}
+
+.desejo--active{
+    display: block;
+}
+
+.esperando--remover{
+    display: none;
+}
+
+.btn-danger--remover{
+    background-color: rgba(25, 172, 25, 0.705);
+    border-color: rgba(25, 172, 25, 0.705);
+}
+
+.btn-danger--remover:hover{
+    background-color: rgba(25, 172, 25, 0.705);
+    border-color: rgba(25, 172, 25, 0.705);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 200px;
+
+}

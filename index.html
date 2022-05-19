@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./imgs/logo.ico" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <title>SeuDesejo</title>
+    
+</head>
+
+
+<body class="fundo">
+
+  <!-- BOTÃO MUDA A COR DO FUNDO -->
+  <div>
+    <button id="botaoLight" class="botao-ligado">
+      <img class="img-ligado" src="./imgs/ligado.png" alt="">
+    </button>
+    <button id="botaoDark" class="botao-desligado">
+      <img class="img-desligado" src="./imgs/desligado.png" alt="">
+    </button>
+  </div>
+
+  <!-- MENU DO USUARIO LOGADO -->
+  <nav id="menu-login" class="menu-login">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn btn-danger" onclick="deletar()">Excluir</button>
+        <h1 style="color: white;">DADOS:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div>
+        <form id="form-login" class="form-login">
+
+          <div>
+            <input id="userLogado" type="text" placeholder="Nome de Usuário" class="form-input-logado">
+            <div class="ajuda">
+              <span>Nome de Usuário</span>
+            </div>
+          </div>
+  
+          <div>
+            <input id="userDataLogado" type="text" placeholder="Data de Nascimento [dd/mm/aaaa]" class="form-input-logado">
+            <div class="ajuda">
+              <span>Data de Nascimento(OPCIONAL)</span>
+            </div>
+          </div>
+
+          <div>
+            <input id="senhaEdit" type="password" placeholder="Nova Senha" class="form-input-logado">
+            <div class="ajuda">
+              <span>Para trocar de senha preencha</span>
+            </div>
+          </div>
+
+          <div>
+            <input id="senhaEditConfirm" type="password" placeholder="Confirmar Nova Senha" class="form-input-logado">
+            <div class="ajuda">
+              <span>Confirme a sua nova senha</span>
+            </div>
+          </div>
+
+          <button id="saveEditLogado" class="form-input-logado-btn" onclick="saveEdit()">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modal LOGIN -->
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-pattern">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="cabecalho-logo">SEUDESEJO</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="area-login">
+            <div class="modal-form-container">
+              <form id="form-login" class="form-login">
+                <div>
+                  <input id="emailLogin" type="email" placeholder="E-mail" class="form-input">
+                </div>
+                <div>
+                  <input id="senhaLogin" type="password" placeholder="Senha" class="form-input">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <div class="form-switch" style="display: none;">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                  <label class="custom-control-label" for="flexSwitchCheckDefault">Manter Logado</label>
+                </div>
+                <button class="form-input" type="submit" onclick="logar()">Logar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="esquecer-senha"  data-bs-target="#lembrar-senha" data-bs-toggle="modal" href="#">Esqueceu a senha?</a>
+          <a class="criar-conta" data-bs-target="#criacao-conta" data-bs-toggle="modal" href="#">Criar uma conta</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  <!-- Modal CRIAR CONTA -->
+  <div class="modal fade" id="criacao-conta" aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-pattern">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title cabecalho-logo" id="exampleModalToggleLabel2">SEUDESEJO</h5>
+          <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="area-login">
+            <div class="modal-form-container">
+              <form id="form-login" class="form-login">
+                <div>
+                  <input id="userName" type="text" placeholder="Nome de Usuário" class="form-input" >
+                </div>
+                <div>
+                  <input id="userEmail" type="email" placeholder="E-mail" class="form-input">
+                </div>
+                <div>
+                  <input id="userData" type="text" placeholder="Data de Nascimento [dd/mm/aaaa] (OPCIONAL)" class="form-input" >
+                </div>
+                <div>
+                  <input id="userSenha" type="password" placeholder="Senha" class="form-input">
+                  <i id="verSenha" class="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <input id="userSenhaConfirm" type="password" placeholder="Confirmar Senha" class="form-input">
+                  <i id="verSenhaConfirm" class="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <button id="CadastrarUser" class="form-input" onclick="cadastrar()">Cadastrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="esquecer-senha" data-bs-target="#exampleModal" data-bs-toggle="modal" href="#">Acessar conta existente!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal ESQUECEU A SENHA -->
+  <div class="modal fade" id="lembrar-senha" aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-pattern">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title cabecalho-logo" id="exampleModalToggleLabel2">SEUDESEJO</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="area-login">
+            <div class="modal-form-container">
+              <form id="form-login" class="form-login">
+                <div>
+                  <input name="email" type="email" placeholder="E-mail" class="form-input">
+                </div>
+                <button class="form-input" type="submit">Recuperar Senha</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CABEÇALHO -->
+  <header class="cabecalho">
+
+    <nav id="crud">
+
+        <a class="logado" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><img src="./imgs/logo_branca.png" alt="">Logado</a>
+
+        <a class="login" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="./imgs/logo_branca.png" alt="">Login</a>
+
+        <p class="menu login">Menu</p>
+    </nav>
+    
+    <nav class="cabecalho-menu">
+        <a class="cabecalho-menu-item" href="#lista">Lista de Desejos</a>
+        <a class="cabecalho-menu-item" href="#contato">Contato</a>
+        <a class="cabecalho-menu-item" href="#duvidar">Dúvidas</a>
+    </nav>
+    
+    <nav>
+        <a class="cabecalho-logo" href="#">SEUDESEJO</a>
+    </nav>
+
+  </header>
+
+  <!-- CABECALHO MOBILE -->
+  <div class="menu-mobile">
+    <a class="close">&times;</a>
+    <div class="conteudo-menu-mobile">
+        <a href="#lista" class="desejo-listar">Lista de Desejos</a>
+        <a href="#contato" class="contatar">Contato</a>
+        <a href="#duvidar" class="duvidas-fre">Dúvidas</a>
+        <a class="log-moda" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
+    </div>
+  </div>
+
+
+  <!-- CONTEÚDO -->
+  <main>
+
+    <div class="caixa-main">
+      <div class="main-content">
+        <h1 class="text-center">Nós realizamos um sentimento</h1>
+        <h2 class="text-center">de desejo para ajudá-lo a se sentir satisfeito e conectado apesar do mundo estressante ao seu redor</h2>
+        
+        <div class="img-desenho">
+          <img src="./imgs/desejoos.png" alt="" >
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="texto-secundario">
+        <h3 class="distancia-title text-center">Uma simplicidade para os tempos modernos</h3>
+        <p class="sub-texto text-center">Todos nós temos muitas abas abertas em nossos navegadores e em nossos cérebros é por isso que fizemos o SEUDESEJO para criar um momento no seu dia onde você possa realmente pensar sobre as coisas que importam</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="teste">
+      <img src="./imgs/lamp.png" class="rounded float-start" alt="...">
+      <img src="./imgs/lamp-vir.png" class="rounded float-end" alt="...">
+    </div>
+
+    <div class="lista-desejo" id="lista">
+        <h1>Lista de Desejos</h1>
+    </div>
+
+    <section class="response-card">
+      <div class="card" style="width: 20rem;">  
+        <!-- <a href="https://yan562004.github.io/SeuDesejo/jogos.html#disqus_thread">Link</a> -->
+        <img src="https://playzuando.com.br/wp-content/uploads/2022/02/RE4HtyX.jpg" class="card-img-top" alt="imagem">
+        <div class="card-body">
+        <h5 class="card-title">Jogos</h5>
+        <p class="card-text">Espaço destinado aos desejos referentes a criação de jogos</p>
+        <a href="jogos.html" class="btn btn-primary">Desejar</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 20rem;">
+          <img src="https://images-ext-2.discordapp.net/external/dtm_1d3a7QCl4opG0AyenHr6uMY8qjdUwuFbfZmHBJA/https/i.pinimg.com/originals/18/2a/54/182a54b2abc4cd40911afd65e2ad3ad5.jpg?width=722&height=406" class="card-img-top" alt="imagem">
+          <div class="card-body">
+          <h5 class="card-title">Mods</h5>
+          <p class="card-text">Espaço destinado aos desejos referentes a criação de mods</p>
+          <a href="indexMods.html" class="btn btn-primary">Desejar</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 20rem;">
+          <img src="https://cdn.discordapp.com/attachments/911252191103316059/971588484995366952/Untitled-3.png" class="card-img-top" alt="imagem">
+          <div class="card-body">
+          <h5 class="card-title">Bots</h5>
+          <p class="card-text">Espaço destinado aos desejos referentes a criação de bots</p>
+          <a href="indexBots.html" class="btn btn-primary">Desejar</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 20rem;">
+          <img src="https://www.maiwebdesign.com.br/wp-content/uploads/2018/11/os-sites-mais-acessados-em-2018.jpg" class="card-img-top" alt="imagem">
+          <div class="card-body">
+          <h5 class="card-title">Sites</h5>
+          <p class="card-text">Espaço destinado aos desejos referentes a criação de sites</p>
+          <a href="indexSites.html" class="btn btn-primary">Desejar</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 20rem;">
+          <img src="https://cdn.discordapp.com/attachments/911252191103316059/971591311478112306/Untitled-4.png" class="card-img-top" alt="imagem">
+          <div class="card-body">
+          <h5 class="card-title">Inteligência Artificial</h5>
+          <p class="card-text">Espaço destinado aos desejos referentes a criação de IAs</p>
+          <a href="indexIa.html" class="btn btn-primary">Desejar</a>
+          </div>
+      </div>
+    </section>
+
+    <div class="duvidas" id="duvidar">
+      <h1>DÚVIDAS FREQUENTES</h1>
+    </div>
+
+    <section class="response-card2">
+
+      <div class="card border-danger mb-3 red-card" style="max-width: 18rem;">
+          <div class="card-header"><abbr title="Entrega dos desejos">Como realiza o desejo?</abbr> </div>
+          <div class="card-body text-danger">
+            <h5 class="card-title">COMENTÁRIOS</h5>
+            <p class="card-text">Basta ir no final da área de desejo que você escolheu e realizar um comentário.</p>
+          </div>
+      </div>
+
+
+      <div class="card border-danger mb-3 red-card" style="max-width: 18rem;">
+          <div class="card-header">Como será a entrega?</div>
+          <div class="card-body text-danger">
+            <h5 class="card-title">SIMPLES !</h5>
+            <p class="card-text">Fazendo login no nosso site ou se inscrevendo no nosso canal do Youtube.</p>
+          </div>
+      </div>
+
+      <div class="card border-danger mb-3 red-card" style="max-width: 18rem;">
+        <div class="card-header">Os desejos são gratuitos?</div>
+        <div class="card-body text-danger">
+          <h5 class="card-title">SIM !</h5>
+          <p class="card-text">Os desejos a serem realizados seram todos gratuitos.</p>
+        </div>
+      </div>
+
+      <div class="card border-warning mb-3 yellow-card" style="max-width: 18rem;">
+        <div class="card-header">Qual o prazo?</div>
+        <div class="card-body">
+          <h5 class="card-title">1 DESEJO POR MÊS</h5>
+          <p class="card-text">Todo mês um desejo vai ser escolhido para ser construído.</p>
+        </div>
+      </div>
+
+      <div class="card border-warning mb-3 yellow-card" style="max-width: 18rem;">
+        <div class="card-header">Quem são vocês?</div>
+        <div class="card-body">
+          <h5 class="card-title">PROGAMADORES</h5>
+          <p class="card-text">Somos uma equipe de programadores composta por 10 integrantes.</p>
+        </div>
+      </div>
+
+      <div class="card border-primary mb-3 blue-card" style="max-width: 18rem;">
+        <div class="card-header">Terão mais desejos?</div>
+        <div class="card-body">
+          <h5 class="card-title">SIM !</h5>
+          <p class="card-text">Periodicamente o SEUDESEJO vai passar por grandes atualizações.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  
+  <div id="rodape-social">
+        <ul>
+            <li><a href="https://discord.gg/C3gPYB8HYS" class="discord" target="_blank"><img src="./imgs/discord.png" alt="Discord"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCggeGpBBU5PIsiamKWYebow" class="youtube" target="_blank"><img src="./imgs/youtube.png" alt="Youtube"></a></li>
+        </ul>
+        <a href="#" class="topo">INÌCIO&#x1F3E0</a>
+        <hr>
+        <p id="contato"><a id="liveToastBtn">SeuDesejo</a> © 2022</p>
+        <p>Powered by Yan Leal & Kauan Casemiro</p>
+  </div>
+
+  <!-- ESTER EGG -->
+
+  <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="https://media.discordapp.net/attachments/911252191103316059/973572972226961470/lolo.png?width=26&height=18" class="rounded me-2" alt="...">
+        <strong class="me-auto">SEUDESEJO</strong>
+        <small>NEW</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        EITA !! VC ME DESCOBRIU ! COMO PRÊMIO <a href="enigma.html">Falido.Inc</a>  
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var toastTrigger = document.getElementById('liveToastBtn')
+    var toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+      toastTrigger.addEventListener('click', function () {
+        var toast = new bootstrap.Toast(toastLiveExample)
+
+        toast.show()
+      })
+    }
+  </script>
+
+  <!-- CRUD SEUDESJO -->
+  <script src="crud.js" defer></script>
+  <script src="botaoNoturno.js" defer></script>
+
+  <script id="dsq-count-scr" src="https://seudesejo.disqus.com/count.js" async></script>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="vanilla-tilt.js"></script>
+  <script>
+    VanillaTilt.init(document.querySelectorAll(".card"), {
+    max: 25,
+    speed: 400,
+    glare: true,
+    "max-glare": 1,
+  });
+  </script>
+
+  <script type="text/javascript" src="mobile.js"></script>
+
+</body>
+</html>
