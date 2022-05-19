@@ -132,10 +132,13 @@ function logar(){
 
         let botaoLogado = document.querySelector('.logado')
         let botaoLogin = document.querySelector('.login')
+        let botaoMobileLogin = document.querySelector('.log-moda')
         // let botaoEditLogado = document.querySelector('saveEditLogado')
 
         botaoLogin.classList.add("login--remover");
         botaoLogado.setAttribute('style', 'display: revert');
+        
+        botaoMobileLogin.setAttribute('style', 'display: none');
 
         let manterLogado = document.getElementById('flexSwitchCheckDefault').checked;
 
